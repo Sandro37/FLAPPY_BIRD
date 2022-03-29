@@ -9,9 +9,10 @@ public class SpawnerPipes : MonoBehaviour
     [SerializeField] private float maxTime;
     private float timer = 0f;
 
+    ObjectPooler objectPooler;
     void Start()
     {
-        CreatePipe();
+        objectPooler = ObjectPooler.Instance;
     }
     void Update()
     {
@@ -23,9 +24,7 @@ public class SpawnerPipes : MonoBehaviour
     }
     private void CreatePipe()
     {
-        GameObject newPipe = Instantiate(pipePrefab);
-        newPipe.transform.position = transform.position + new Vector3(0, Random.Range(-height, height), 0);
-        Destroy(newPipe, 10f);
+        ObjectPooler.Instance.SpawnFromPool("Pipe", transform.position + new Vector3(0, Random.Range(-height, height), 0), Quaternion.identity);
         timer = 0;
     }
 

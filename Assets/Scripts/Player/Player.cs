@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField] private float speed = 1f;
     private Rigidbody2D rig;
@@ -21,11 +21,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void TakeDamage()
     {
-        if (collision.gameObject.CompareTag("Pipe"))
-        {
-            GameController.Instance.GameOver();
-        }
+        GameController.Instance.GameOver();
     }
 }
